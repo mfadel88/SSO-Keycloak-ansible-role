@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 User=keycloak
-ExecStart=/server/keycloak/keycloak-22.0.5/bin/kcadm.sh
+ExecStart=/server/keycloak/keycloak-22.0.5/bin/kcadm.sh -Djboss.http.port=8081
 StandardOutput=syslog
 StandardError=syslog
 SyslogIdentifier=keycloak
