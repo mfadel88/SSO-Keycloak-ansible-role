@@ -16,7 +16,7 @@
     state: directory
     owner: keycloak
     group: keycloak
-    mode: '0655'
+    mode: '0777'
   with_items:
     - '/server/keycloak'
     - '/server/keycloak/keycloak-12.0.4/standalone/data'
@@ -27,7 +27,7 @@
   get_url:
     url: "https://github.com/keycloak/keycloak/releases/download/{{ keycloak_version }}/keycloak-{{ keycloak_version }}.tar.gz"
     dest: "/server/keycloak"
-    mode: 0655
+    mode: 0777
 
 
 - name: Set ownership for Keycloak directory
@@ -36,7 +36,7 @@
     state: directory
     owner: keycloak
     group: keycloak
-    mode: '0655'
+    mode: '0777'
 
 - name: Extract Keycloak
   ansible.builtin.unarchive:
