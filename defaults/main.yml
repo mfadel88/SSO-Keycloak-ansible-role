@@ -2,22 +2,6 @@
 # defaults file for keycloak
 keycloak_version: 12.0.4
 keycloak_user: keycloak
-# keycloak_install_dir: /opt/keycloak
+# keycloak_install_dir: /server/keycloak
 
 
-#ExecStart=/server/keycloak/keycloak-22.0.5/bin/standalone.sh -b=0.0.0.0
-
-# [Unit]
-# Description=Keycloak
-# After=network.target
-
-# [Service]
-# User=keycloak
-# ExecStart=/server/keycloak/keycloak-22.0.5/bin/kcadm.sh -b 0.0.0.0 -Djboss.http.port=8081
-# StandardOutput=syslog
-# StandardError=syslog
-# SyslogIdentifier=keycloak
-# TimeoutStartSec=300
-
-# [Install]
-# WantedBy=default.target
