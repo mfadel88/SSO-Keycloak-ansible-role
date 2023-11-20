@@ -4,12 +4,12 @@
 #   yum:
 #     name: java-11-openjdk
 #     state: present
-- name: Create nodexporter group
+- name: Create keycloak group
   group:
     name: keycloak
     state: present
 
-- name: Create nodexporter user
+- name: Create keycloak user
   user:
     name: keycloak
     group: keycloak
@@ -29,7 +29,8 @@
 
 - name: Download and extract Keycloak
   get_url:
-    url: "https://github.com/keycloak/keycloak/releases/download/22.0.5/keycloak-22.0.5.tar.gz"
+    # url: "https://github.com/keycloak/keycloak/releases/download/22.0.5/keycloak-22.0.5.tar.gz"
+    url: "https://downloads.jboss.org/keycloak/{{ keycloak_version }}/keycloak-{{ keycloak_version }}.tar.gz"
     dest: "/server/keycloak"
     mode: 0755
   # become: yes
@@ -53,7 +54,7 @@
 
 - name: Extract Keycloak
   ansible.builtin.unarchive:
-    src: "/server/keycloak/keycloak-22.0.5.tar.gz"
+    src: "/server/keycloak/keycloak-{{ keycloak_version }}.tar.gz"
     dest: "/server/keycloak"
     remote_src: yes
 
@@ -62,6 +63,10 @@
     src: keycloak.service.j2
     dest: "/etc/systemd/system/keycloak.service"
   # become: yes
+
+- name: Reload systemd daemon
+  ansible.builtin.systemd:
+    daemon_reload: yes
 
 - name: Start and enable Keycloak service
   systemd:
