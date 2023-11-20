@@ -4,7 +4,6 @@ After=network.target
 
 [Service]
 User=keycloak
-{% comment %} ExecStart=/server/keycloak/keycloak-22.0.5/bin/standalone.sh -b=0.0.0.0 {% endcomment %}
 ExecStart=/server/keycloak/keycloak-22.0.5/bin/kcadm.sh -b=0.0.0.0
 StandardOutput=syslog
 StandardError=syslog
