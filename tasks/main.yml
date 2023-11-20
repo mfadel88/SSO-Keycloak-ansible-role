@@ -24,6 +24,8 @@
     mode: '0755'
   with_items:
     - '/server/keycloak'
+    - '/server/keycloak/keycloak-12.0.4/standalone/data'
+    - '/server/keycloak/keycloak-12.0.4/standalone/configuration/logging.properties'
     # - '/server/nodexporter/tmp'
     # - '/server/nodexporter/tmp/nodexporter'
 
