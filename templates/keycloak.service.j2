@@ -1,0 +1,14 @@
+[Unit]
+Description=Keycloak
+After=network.target
+
+[Service]
+User=keycloak
+ExecStart=/server/keycloak/bin/standalone.sh -b=0.0.0.0
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=keycloak
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target
