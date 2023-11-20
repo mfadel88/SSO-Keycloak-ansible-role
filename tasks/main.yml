@@ -4,6 +4,28 @@
 #   yum:
 #     name: java-11-openjdk
 #     state: present
+- name: Create nodexporter group
+  group:
+    name: keycloak
+    state: present
+
+- name: Create nodexporter user
+  user:
+    name: keycloak
+    group: keycloak
+    state: present
+
+- name: Create required directories
+  file:
+    path: '{{ item }}'
+    state: directory
+    owner: keycloak
+    group: keycloak
+    mode: '0755'
+  with_items:
+    - '/server/keycloak'
+    # - '/server/nodexporter/tmp'
+    # - '/server/nodexporter/tmp/nodexporter'
 
 - name: Download and extract Keycloak
   get_url:
@@ -12,13 +34,13 @@
     mode: 0755
   # become: yes
 
-- name: Create Keycloak user
-  user:
-    name: keycloak
-    home: "/server/keycloak"
-    shell: "/bin/bash"
-    createhome: yes
-  # become: yes
+# - name: Create Keycloak user
+#   user:
+#     name: keycloak
+#     home: "/server/keycloak"
+#     shell: "/bin/bash"
+#     createhome: yes
+#   # become: yes
 
 - name: Set ownership for Keycloak directory
   file:
@@ -31,7 +53,7 @@
 
 - name: Extract Keycloak
   ansible.builtin.unarchive:
-    src: "/server/keycloak-22.0.5.tar.gz"
+    src: "/server/keycloak/keycloak-22.0.5.tar.gz"
     dest: "/server/keycloak"
   # become: yes
 
