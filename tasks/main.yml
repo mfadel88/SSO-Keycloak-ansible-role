@@ -55,7 +55,7 @@
   ansible.builtin.unarchive:
     src: "/server/keycloak/keycloak-22.0.5.tar.gz"
     dest: "/server/keycloak"
-  # become: yes
+  remote_src: yes
 
 - name: Create systemd service configuration
   template:
