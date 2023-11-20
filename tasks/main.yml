@@ -49,7 +49,7 @@
 - name: Set ownership for Keycloak directory
   file:
     path: "/server/keycloak"
-    path: "/server/keycloak/keycloak-12.0.4/standalone/configuration/logging.properties"
+    # path: "/server/keycloak/keycloak-12.0.4/standalone/configuration/logging.properties"
     state: directory
     owner: keycloak
     group: keycloak
