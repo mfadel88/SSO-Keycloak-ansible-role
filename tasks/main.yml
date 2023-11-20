@@ -9,8 +9,8 @@
   get_url:
     url: "https://github.com/keycloak/keycloak/releases/download/22.0.5/keycloak-22.0.5.tar.gz"
     dest: "/server/keycloak"
-    mode: 0766
-  become: yes
+    mode: 0755
+  # become: yes
 
 - name: Create Keycloak user
   user:
@@ -18,7 +18,7 @@
     home: "/server/keycloak"
     shell: "/bin/bash"
     createhome: yes
-  become: yes
+  # become: yes
 
 - name: Set ownership for Keycloak directory
   file:
@@ -26,24 +26,24 @@
     state: directory
     owner: keycloak
     group: keycloak
-    mode: '0644'
-  become: yes
+    mode: '0755'
+  # become: yes
 
 - name: Extract Keycloak
   ansible.builtin.unarchive:
     src: "/server/keycloak-22.0.5.tar.gz"
     dest: "/server/keycloak"
-  become: yes
+  # become: yes
 
 - name: Create systemd service configuration
   template:
     src: keycloak.service.j2
     dest: "/etc/systemd/system/keycloak.service"
-  become: yes
+  # become: yes
 
 - name: Start and enable Keycloak service
   systemd:
     name: keycloak
     state: started
     enabled: yes
-  become: yes
+  # become: yes
