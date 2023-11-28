@@ -58,7 +58,7 @@
     group: keycloak  # Replace 'keycloak' with your desired group
     recurse: yes
     mode: "0775"
-      # become: yes
+  become: yes
 
 - name: Reload systemd daemon
   ansible.builtin.systemd:
