@@ -54,6 +54,7 @@
   ansible.builtin.file:
     path: "/server/keycloak"
     path: "/etc/systemd/system/keycloak.service"
+    state: directory
     owner: keycloak  # Replace 'keycloak' with your desired username
     group: keycloak  # Replace 'keycloak' with your desired group
     recurse: yes
