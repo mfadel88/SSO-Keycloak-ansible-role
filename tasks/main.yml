@@ -27,16 +27,8 @@
   get_url:
     url: "https://github.com/keycloak/keycloak/releases/download/{{ keycloak_version }}/keycloak-{{ keycloak_version }}.tar.gz"
     dest: "/server/keycloak"
-    mode: 0777
+    mode: 0775
 
-
-- name: Set ownership for Keycloak directory
-  file:
-    path: "/server/keycloak"
-    state: directory
-    owner: keycloak
-    group: keycloak
-    mode: '0777'
 
 - name: Extract Keycloak
   ansible.builtin.unarchive:
@@ -44,10 +36,29 @@
     dest: "/server/keycloak"
     remote_src: yes
 
+# - name: Set ownership for Keycloak directory
+#   file:
+#     path: "/server/keycloak"
+#     state: directory
+#     owner: keycloak
+#     group: keycloak
+#     mode: '0775'
+
+
 - name: Create systemd service configuration
   template:
     src: keycloak.service.j2
     dest: "/etc/systemd/system/keycloak.service"
+
+- name: Set ownership, group, and mode for Keycloak directory
+  ansible.builtin.file:
+    path: "/server/keycloak"
+    path: "/etc/systemd/system/keycloak.service"
+    owner: keycloak  # Replace 'keycloak' with your desired username
+    group: keycloak  # Replace 'keycloak' with your desired group
+    recurse: yes
+    mode: "0775"
+      # become: yes
 
 - name: Reload systemd daemon
   ansible.builtin.systemd:
