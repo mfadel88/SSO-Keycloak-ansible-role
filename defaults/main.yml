@@ -1,6 +1,6 @@
 ---
 # defaults file for keycloak
-keycloak_version: 12.0.4
+keycloak_version: 23.0.0
 keycloak_user: keycloak
 # keycloak_install_dir: /server/keycloak
 
